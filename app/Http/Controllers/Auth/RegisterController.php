@@ -6,6 +6,9 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -27,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -45,14 +48,58 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+    // protected function validator(array $data)
+    // {
+    //   // dd($data);
+    //     return Validator::make($data, [
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|string|email|max:255|unique:users',
+    //         'password' => 'required|string|min:6|confirmed',
+    //         'gender' => 'required',
+    //         // 'birthday' => 'required',
+    //         'birth_year' => 'required',
+    //         'birth_month' => 'required',
+    //         'birth_day' => 'required',
+    //         'address' => 'required',
+    //         'phone' => 'required',
+    //     ]);
+    // }
+
+
+    //登録情報確認画面
+    public function registerCheck(Request $request){
+      // dd($request);
+
+      $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:6|confirmed',
+        'gender' => 'required',
+        // 'birthday' => 'required',
+        'birth_year' => 'required',
+        'birth_month' => 'required',
+        'birth_day' => 'required',
+        'address' => 'required',
+        'phone' => 'required',
+      ]);
+
+      $birthday=$request->birth_year.$request->birth_month.$request->birth_day;
+
+      $user = new User();
+      $user->name=$request->name;
+      $user->email=$request->email;
+      $user->password=$request->password;
+      $user->gender=$request->gender;
+      $user->birthday=$birthday;
+      $user->address=$request->address;
+      $user->phone=$request->phone;
+
+      $token = md5(uniqid(rand(), true));
+      $request->session()->put('token', $token);
+
+      return view('auth.check')->with(['user'=>$user, 'token'=>$token]);
     }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -60,12 +107,28 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function registerComplete(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+      $user_token=$request->get('token');
+      if($request->session()->get('token') !== $user_token){
+        return redirect('/');
+      }
+        $request->session()->forget('token');
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->gender = $request->gender;
+        $user->birthday = $request->birthday;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->save();
+
+      if(Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])){
+        return redirect('/');
+      }
+
+      return view('rooms.index');
     }
 }
