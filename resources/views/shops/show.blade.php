@@ -6,13 +6,6 @@
 @endsection
 
 @section('content')
-<!--sidebar部分-->
-<div id="sidebar">
-  @foreach($categories as $category)
-    <a href="{{ action('ShopsController@index')}}">{{$category->name}}</a><br>
-  @endforeach
-</div>
-
   <div class='container'>
     <br><p class="text-muted">
       <a href="{{ action('ShopsController@index')}}">Top</a>

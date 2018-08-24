@@ -30,5 +30,12 @@ class ShopsController extends Controller
       return view('shops.category')->with('categories', $categories);
     }
 
+    //カテゴリ一覧ページ
+    public function categoryDetail(Ms_category $category){
+      // dd($category);
+      return view('shops.categoryitem')->with('category', $category);
+    }
+
+
 
 }
