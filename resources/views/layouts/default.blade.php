@@ -73,7 +73,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                  <li role="presentation"><a href="{{ action('ShopsController@allItems')}}">My Page</a></li>
+                                  <li role="presentation"><a href="{{ action('UsersController@info')}}">My Page</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

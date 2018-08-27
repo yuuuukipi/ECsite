@@ -70,7 +70,7 @@
                         <div class="radio-inline">
                                 <input type="radio" name="gender" value="1">
                                 <label for="gender1">女</label>
-                              </div>
+                          </div>
 
                                 @if ($errors->has('gender'))
                                     <span class="help-block">

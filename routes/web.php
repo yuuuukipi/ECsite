@@ -34,7 +34,13 @@ Route::get('items','ShopsController@allItems');
 Route::get('search','ShopsController@search');
 
 
-//マイページ
-Route::get('mypage','UsersController@mypage');
+// //マイページ
+// Route::get('mypage','UsersController@mypage');
+//マイページ　会員情報
+Route::get('mypage/info','UsersController@info');
+//マイページ　会員情報　登録情報更新
+Route::patch('mypage/info', 'UsersController@update')->name('update');
+//マイページ　購入履歴
+Route::get('mypage/history','UsersController@history');
 
 // Route::get('/home', 'HomeController@index')->name('home');
