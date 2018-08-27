@@ -10,7 +10,7 @@
     <br><p class="text-muted">カテゴリ一覧</p>
 
     @foreach($categories as $category)
-      <a href="{{ action('ShopsController@index')}}">{{$category->name}}</a><br>
+      <a href="{{ action('ShopsController@categoryDetail',$category)}}">{{$category->name}}</a><br>
     @endforeach
 
       </div>

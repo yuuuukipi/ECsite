@@ -41,6 +41,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -66,10 +67,22 @@
                                 </ul>
                             </li>
                         @endguest
+
                     </ul>
+
                 </div>
+
             </div>
         </nav>
+
+
+        <!-- <nav class="navbar navbar-right bg-light justify-content-between">
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </nav> -->
+
 
         @yield('content')
     </div>

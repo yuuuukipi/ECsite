@@ -1,90 +1,111 @@
 <!DOCTYPE html>
 <html lang="ja">
-
-  <head>
+<head>
     <meta charset="utf-8">
-    <title>fashion-site | @yield('title', 'Home')</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-  </head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <body>
-    @section('body')
-      <style>
-          html, body {
-              background-color: #fff;
-              color: #636b6f;
-              font-family: 'Raleway', sans-serif;
-              font-weight: 100;
-              height: 100vh;
-              margin: 0;
-          }
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-          /* .full-height {
-              height: 10vh;
-          } */
+    <title>fashion ec site</title>
 
-          .flex-center {
-              align-items: center;
-              display: flex;
-              justify-content: center;
-          }
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
 
-          .position-ref {
-              position: relative;
-          }
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
-          .top-right {
-              position: absolute;
-              right: 10px;
-              top: 18px;
-          }
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        Fashion Ec Site
+                    </a>
+                </div>
 
-          .content {
-              text-align: center;
-          }
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        &nbsp;
+                    </ul>
 
-          .title {
-              font-size: 84px;
-          }
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
 
-          .links > a {
-              color: #636b6f;
-              padding: 0 25px;
-              font-size: 12px;
-              font-weight: 600;
-              letter-spacing: .1rem;
-              text-decoration: none;
-              text-transform: uppercase;
-          }
+                      <li><form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="検索キーワード">
+                        </div>
+                        <button type="submit" class="btn btn-default">検索</button>
+                      </form></li>
 
-          .m-b-md {
-              margin-bottom: 30px;
-          }
-      </style>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" v-pre>
+                          CATEGORY
+                          <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                          @foreach($categories as $category)
+                            <li role="presentation"><a href="{{ action('ShopsController@categoryDetail',$category)}}">{{$category->name}}</a></li>
+                          @endforeach
+                        </ul>
+                      </li>
 
-      <div class="flex-center position-ref full-height">
-          @if (Route::has('login'))
-              <div class="top-right links">
-                  @auth
-                      <a href="{{ url('/home') }}">Home</a>
-                  @else
-                      <a href="{{ route('login') }}">Login</a>
-                      <a href="{{ route('register') }}">Register</a>
-                  @endauth
-              </div>
-          @endif
+                        <!-- Authentication Links -->
+                        @guest
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endguest
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </nav>
 
 
-        <div class='container'>
-          @yield('content')
-        </div>
+        <!-- <nav class="navbar navbar-right bg-light justify-content-between">
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </nav> -->
+
+
+        @yield('content')
     </div>
 
-
-    @show
-
-    @yield('footer')
-      <script src="{{ asset('js/app.js') }}"></script>
-  </body>
-
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+</body>
 </html>

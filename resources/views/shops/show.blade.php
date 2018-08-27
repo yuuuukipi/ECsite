@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.default')
 @section('title','TOP')
 @section('sidebar')
   @parent
@@ -6,33 +6,26 @@
 @endsection
 
 @section('content')
-<!--sidebar部分-->
-<div id="sidebar">
-  @foreach($categories as $category)
-    <a href="{{ action('ShopsController@index')}}">{{$category->name}}</a><br>
-  @endforeach
-</div>
-
   <div class='container'>
     <br><p class="text-muted">
       <a href="{{ action('ShopsController@index')}}">Top</a>
        >
-       <a href="{{ action('ShopsController@index')}}">{{$product->ms_category->name}}(path仮置き)</a>
+       <a href="{{ action('ShopsController@categoryDetail',$product->category)}}">{{$product->category->name}}</a>
        >
        {{$product->name}}
        </p>
       <div class="left_wrap">
         @if($product->image=="")
-          <img src="/images/noimage.png" alt="no image">
+          <img src="/images/noimage.png" alt="no image" class="img_main">
         @else
-          <img src="/images/{{$product->image}}" alt="image">
+          <img src="/images/{{$product->image}}" alt="image" class="img_main">
         @endif
       </div>
 
       <div class="right_wrap">
         <h1>{{$product->name}}</h1>
         <h2>{{$product->price}}円(税込)</h2><br>
-        <p>{{$product->comment}}</p><br><br>
+        <p>{!! nl2br(e($product->comment)) !!}</p><br><br>
 
         <p>数量<input type="text" name="amount" value="1" size="2" maxlength="9" required autofocus></p>
 
