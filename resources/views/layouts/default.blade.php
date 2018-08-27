@@ -42,11 +42,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
 
-                      <li><form class="navbar-form navbar-left" role="search">
+                      <li><form class="navbar-form navbar-left" role="search" action="{{action('ShopsController@search')}}">
+                        {{ csrf_field() }}
                         <div class="form-group">
-                          <input type="text" class="form-control" placeholder="検索キーワード">
+                          <input type="text" class="form-control" placeholder="keyword" name="word">
                         </div>
-                        <button type="submit" class="btn btn-default">検索</button>
+                        <button type="submit" class="btn btn-default">seach</button>
                       </form></li>
 
                       <li class="dropdown">
@@ -54,6 +55,7 @@
                           CATEGORY
                           <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            <li role="presentation"><a href="{{ action('ShopsController@allItems')}}">All</a></li>
                           @foreach($categories as $category)
                             <li role="presentation"><a href="{{ action('ShopsController@categoryDetail',$category)}}">{{$category->name}}</a></li>
                           @endforeach
@@ -71,6 +73,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                  <li role="presentation"><a href="{{ action('ShopsController@allItems')}}">My Page</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

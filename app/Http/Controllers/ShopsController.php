@@ -43,10 +43,38 @@ class ShopsController extends Controller
       // dd($category);
       $categories = Category::all();
 
-      return view('shops.category_item')->with(['category'=>$category, 'categories'=>$categories]);
-;
+      return view('shops.category')->with(['category'=>$category, 'categories'=>$categories]);
+
+    }
+
+    //商品全件表示
+    public function allItems(){
+      $categories = Category::all();
+      $products = Product::all();
+
+      return view('shops.items')->with(['products'=>$products, 'categories'=>$categories]);
+
     }
 
 
+    //検索結果一覧表示ページ
+    public function search(Request $request){
+      $categories = Category::all();
+      $query = Product::query();
+      // $products = Product::get();
+      if(!empty($request)){
+          // dd(1);
+          $query->orWhere('name','like','%'.$request->word.'%');
+          $query->orWhere('comment','like','%'.$request->word.'%');
+      }
+      $results=$query->get();
+      $count=count($results);
+      // dd($count);
+      // dd($request->word);
+      // $categories = Category::all();
+
+      return view('shops.search')->with(['results'=>$results, 'categories'=>$categories, 'count'=>$count]);
+
+    }
 
 }
