@@ -23,9 +23,18 @@ Route::post('/self/complete','Auth\RegisterController@registerComplete')->name('
 //ShowsController
 //商品詳細画面
 Route::get('item/{product}','ShopsController@show')->where('room', '[0-9]+');
-//カテゴリ一覧ページ
-Route::get('category','ShopsController@categoryShow')->where('category', '[0-9]+');
+// //カテゴリ一覧ページ
+// Route::get('category','ShopsController@categoryShow')->where('category', '[0-9]+');
 //カテゴリ別商品一覧ページ
 Route::get('category/{category}','ShopsController@categoryDetail');
+//全件表示
+Route::get('items','ShopsController@allItems');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//検索機能
+Route::get('search','ShopsController@search');
+
+
+//マイページ
+Route::get('mypage','UsersController@mypage');
+
+// Route::get('/home', 'HomeController@index')->name('home');

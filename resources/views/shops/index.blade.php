@@ -33,7 +33,7 @@
     </div>
     --}}
 
-    <br><p class="text-muted">New items</p>
+    <br><p class="text-muted"><h2>New Arrival</h2></p><br>
       <div class="container">
           <div class="row">
             @foreach($products as $product)
@@ -45,7 +45,7 @@
                 @endif
                 <br>
                 <a href="{{ action('ShopsController@show', $product)}}">{{$product->name}}</a>
-                <a href="{{ action('ShopsController@show', $product)}}">{{$product->price}}</a>
+                <p>{{$product->price}}円+税</p>
               </div>
             @endforeach
           </div>

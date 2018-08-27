@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.default')
 @section('title','TOP')
 @section('sidebar')
   @parent
@@ -7,10 +7,24 @@
 
 @section('content')
   <div class='container'>
-    <br><p class="text-muted">カテゴリ一覧</p>
+    <br><p class="text-muted">
+      <a href="{{ action('ShopsController@index')}}">Top</a>
+       >
+       {{$category->name}}
+       </p>
 
-    @foreach($categories as $category)
-      <a href="{{ action('ShopsController@categoryDetail',$category)}}">{{$category->name}}</a><br>
+    @foreach($category->products as $category)
+    	<div class="col-xs-5 col-md-4">
+    		<div class="thumbnail">
+    			<div class="caption">
+            @if($category->image=="")
+              <a href="{{ action('ShopsController@show', $category)}}"><img src="/images/noimage.png" alt="no image" class="img1"></a>
+            @else
+              <a href="{{ action('ShopsController@show', $category)}}"><img src="/images/{{$category->image}}" alt="image" class="img1"></a>
+            @endif
+        <br><a href="{{ action('ShopsController@show', $category)}}">{{$category->name}}</a>
+        <br>{{$category->price}}円+税
+      </div></div></div>
     @endforeach
 
       </div>
