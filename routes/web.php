@@ -20,7 +20,7 @@ Route::post('/check','Auth\RegisterController@registerCheck')->name('registerChe
 //会員登録完了画面
 Route::post('/self/complete','Auth\RegisterController@registerComplete')->name('registerComplete');
 
-//ShowsController
+/*ShopsController*/
 //商品詳細画面
 Route::get('item/{product}','ShopsController@show')->where('room', '[0-9]+');
 // //カテゴリ一覧ページ
@@ -34,13 +34,24 @@ Route::get('items','ShopsController@allItems');
 Route::get('search','ShopsController@search');
 
 
-// //マイページ
-// Route::get('mypage','UsersController@mypage');
+/*UsersController*/
 //マイページ　会員情報
 Route::get('mypage/info','UsersController@info');
 //マイページ　会員情報　登録情報更新
 Route::patch('mypage/info', 'UsersController@update')->name('update');
 //マイページ　購入履歴
 Route::get('mypage/history','UsersController@history');
+
+/*OrderController*/
+//カートに入れる
+Route::post('order/cart','OrderController@addCart')->name('addCart');
+//カート表示
+Route::get('order/cart','OrderController@showCart');
+//個数変更
+Route::post('order/cart/{cart}','OrderController@editAmount')->name('editAmount');
+//カートから商品削除
+Route::delete('/order/cart/{cart}', 'OrderController@destroy');
+
+
 
 // Route::get('/home', 'HomeController@index')->name('home');

@@ -27,16 +27,18 @@
         <h2>{{$product->price}}円(税込)</h2><br>
         <p>{!! nl2br(e($product->comment)) !!}</p><br><br>
 
-        <p>数量<input type="text" name="amount" value="1" size="2" maxlength="9" required autofocus></p>
-
-        <div class="form-group">
-            <div class="col-md-12 col-md-offset-0">
-                <button type="submit" class="btn btn-primary">
-                    カートに入れる
-                </button>
-            </div>
-        </div>
-
+        <form class="form-horizontal" method="POST" action="{{ route('addCart') }}">
+          {{ csrf_field() }}
+          <p>数量<input type="text" name="amount" value="1" size="2" maxlength="9" required autofocus></p>
+          <div class="form-group">
+              <div class="col-md-12 col-md-offset-0">
+                  <button type="submit" class="btn btn-primary">
+                      カートに入れる
+                  </button>
+              </div>
+          </div>
+          <input type="hidden" name="product" value="{{$product->id}}">
+        </form>
       </div>
 
 
