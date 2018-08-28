@@ -9,7 +9,7 @@
   <div class='container'>
     <p class="text-muted"><h2>My Page</h2></p><br>
 
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" style="width:600px;">
     	<li role="presentation" class="active"><a href="{{ action('UsersController@info')}}">会員情報</a></li>
     	<li role="presentation"><a href="{{ action('UsersController@history')}}">購入履歴</a></li>
     </ul>
@@ -17,7 +17,7 @@
   <form method="post" action="{{ route('update') }}">
     {{ csrf_field() }}
     {{ method_field('patch') }}
-    <table class="table">
+    <table class="table" style="width:600px;">
       <thead>
         <tr>
           <td scope="col" class="col-xs-3">名前</td>

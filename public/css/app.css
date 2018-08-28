@@ -48,10 +48,22 @@ img.img1 {
    height: 250px;
 }
 
+img.img2 {
+   width: 100px;
+   height: auto;
+}
+
 img.img_main {
    width: 500px;
    height: auto;
 }
+.detail {
+  margin-top: 0px;
+}
+
+/* .mytable {
+  width: 70%;
+} */
 
 /* .dropdown {
   margin: 10px
