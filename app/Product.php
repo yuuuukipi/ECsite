@@ -15,4 +15,13 @@ class Product extends Model
       return $this->hasmany('App\Cart','product_id');
     }
 
+    public function control() {
+      return $this->belongsTo('App\Control','product_id');
+    }
+
+    public function histories() {
+      return $this->hasmany('App\History','product_id');
+    }
+
+
 }

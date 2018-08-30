@@ -12,7 +12,19 @@
        >
        {{$category->name}}
        </p>
-
+         <p class="text-muted">
+            <div class="dropdown">並び替え
+              <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+                新着
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">新着</a></li>
+                <li><a href="#">価格低</a></li>
+                <li><a href="#">価格高</a></li>
+              </ul>
+            </div>
+          </p>
     @foreach($category->products as $category)
     	<div class="col-xs-5 col-md-4">
     		<div class="thumbnail">

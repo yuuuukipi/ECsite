@@ -7,9 +7,18 @@
 
 @section('content')
   <div class='container'>
-    <br><p class="text-muted"><h2>Cart</h2></p><br>
-      <div class="container">
-          <div class="row">
+    <br>
+    <ul class="order-bar">
+      <li class="order-bar-item-select">ショッピングカート</li>
+      <li class="order-bar-item">お客様情報・お届け先情報</li>
+      <li class="order-bar-item">支払い方法</li>
+      <li class="order-bar-item">ご注文内容確認</li>
+      <li class="order-bar-item">ご注文完了</li>
+    </ul>
+
+    <p class="text-muted"><h2>Cart</h2></p><br>
+    <div class="container">
+        <div class="row">
             <table class="table" style="width: 60%">
               <thead>
                 <tr>
@@ -21,7 +30,7 @@
                   <th scope="col" class="col-xs-2" style="width: 1%;"></th>
                 </tr>
               </thead>
-              @foreach($carts as $key=>$cart)
+              @forelse($carts as $key=>$cart)
               <tbody>
                 <tr>
                   <th scope="row">{{$key+1}}</th>
@@ -57,24 +66,28 @@
 
                   </td>
                 </tr>
-
-              @endforeach
-            </table>
+                @empty
+                  <p class="text-muted">カートに商品が入っていません</p>
+                @endforelse
+              </table>
             <p class="text-muted">合計金額：{{$price}}円（税込）</p>
-            <p class="text-muted">買い物に戻る</p>
 
-          <form class="form-horizontal" method="POST" action="#">
+          <form class="form-horizontal" method="POST" action="{{action('OrderController@sendCheck')}}">
             {{ csrf_field() }}
             <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        購入手続きへ進む
-                    </button>
+                <button type="submit" class="btn btn-primary">
+                    購入手続きへ進む
+                </button>
             </div>
+            <input type="hidden" name="carts" value="{{$carts}}">
           </form>
 
-          </div>
+
+          <a href="{{action('ShopsController@index')}}" class="text-muted">買い物に戻る</a>
+
         </div>
-  </div>
+      </div>
+    </div>
   <script src="/js/main.js"></script>
 
 @endsection

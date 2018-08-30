@@ -50,8 +50,16 @@ Route::get('order/cart','OrderController@showCart');
 //個数変更
 Route::post('order/cart/{cart}','OrderController@editAmount')->name('editAmount');
 //カートから商品削除
-Route::delete('/order/cart/{cart}', 'OrderController@destroy');
+Route::delete('order/cart/{cart}', 'OrderController@destroy');
 
+//お客様情報・届け先情報
+Route::post('order/info/send', 'OrderController@sendCheck')->name('orderInfo');
+//支払い方法
+Route::post('order/info/pay', 'OrderController@payCheck')->name('payInfo');
+//注文内容確認画面
+Route::post('order/info/check', 'OrderController@finalyCheck')->name('fainalyCheck');
+//注文完了
+Route::post('order/info/complete', 'OrderController@complete');
 
 
 // Route::get('/home', 'HomeController@index')->name('home');
