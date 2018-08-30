@@ -31,4 +31,8 @@ class User extends Authenticatable
       return $this->hasmany('App\Cart','user_id');
     }
 
+    public function histories() {
+      return $this->hasmany('App\Histories','user_id');
+    }
+
 }

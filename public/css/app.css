@@ -61,6 +61,39 @@ img.img_main {
   margin-top: 0px;
 }
 
+ul.order-bar{
+  display:table;
+  table-layout:fixed;
+  width:950px;
+  padding-bottom: 50px;
+}
+
+ul.order-bar li {
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    background-color:white;
+    border: solid 1px gray;
+    /* border-left:1px solid gray; */
+    font-size: 11px;
+    height:38px;
+    /* margin-right: 3px; */
+}
+
+/* li.order-bar-item {
+  width: 16.6%;
+  line-height: 32px;
+  float: left;
+  font-size: 10px;
+  text-align: center;
+  list-style: none;
+
+} */
+
+ul.order-bar li.order-bar-item-select {
+  background: #cfd6e4;
+}
+
 /* .mytable {
   width: 70%;
 } */
