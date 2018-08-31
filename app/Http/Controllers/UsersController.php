@@ -6,17 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Address;
+use App\History;
 
 
 class UsersController extends Controller
 {
-    // //マイページ
-    // public function mypage(){
-    //   $user=Auth::user();
-    //   // dd($user);
-    //   return view('users.mypage')->with('user', $user);
-    // }
-
     //会員情報
     public function info(){
       $user=Auth::user();
@@ -27,8 +21,19 @@ class UsersController extends Controller
     //購入履歴
     public function history(){
       $user=Auth::user();
+      $histories = History::select('*')
+          ->where('user_id','=',Auth::user()->id)
+          ->get();
+
+      $his_groups = History::select('order_id')
+          ->where('user_id','=',Auth::user()->id)
+          ->groupBy('order_id')
+          ->get();
+          // dd($histories);
+          // dd($his_groups[0]->order_id);
+
       // dd($user);
-      return view('users.history')->with('user', $user);
+      return view('users.history')->with(['user'=>$user, 'histories'=>$histories, 'his_groups'=>$his_groups]);
     }
 
     //情報更新
