@@ -35,4 +35,9 @@ class User extends Authenticatable
       return $this->hasmany('App\Histories','user_id');
     }
 
+    public function address() {
+      return $this->belongsTo('App\Address','address_id');
+    }
+
+
 }

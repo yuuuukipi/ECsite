@@ -18,6 +18,13 @@ class CreateHistoriesTable extends Migration
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('amount');
+            $table->string('send_name');
+            $table->string('send_email');
+            $table->string('address_id');
+            $table->string('send_phone');
+            $table->string('send_method');
+
             $table->timestamps();
         });
     }

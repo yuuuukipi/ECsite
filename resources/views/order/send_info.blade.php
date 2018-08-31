@@ -24,7 +24,7 @@
         		<div class="thumbnail">
         			<div class="caption">
                 <h4 class="text-muted" style="text-align: center;">ログイン</h4><br>
-                <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('signin') }}">
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -85,17 +85,14 @@
                 <h4 class="text-muted" style="text-align: center;">初めてのお客さま</h4><br>
                 <p>　会員登録後、買い物を続けることができます。<br>
                   　登録は無料ですることができます。<br><br><br>
-                  <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                  <div class="form-horizontal">
                     {{ csrf_field() }}
                     <div class="form-group">
                       <div class="col-md-8 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">
-                            会員登録
-                        </button>
+                        <a href="{{ route('register') }}"><button type="submit" class="btn btn-primary">会員登録</button></a>
                       </div>
                     </div>
-                  </form>
-
+                  </div>
                 </p>
               </div>
             </div>
@@ -162,7 +159,12 @@
                 <tr>
                 <td scope="col">住所</td>
                 <td>
-                  <input type="text" name="address" size="40" value="{{old('address', Auth::user()->address) }}">
+                  〒
+                  <input type="text" name="postal_code" size="15" style="margin: 3px;" value="{{old('address', Auth::user()->address->postal_code) }}"><br>
+                  都道府県
+                  <input type="text" name="prefecture" size="10"  style="margin: 3px;"value="{{old('address', Auth::user()->address->prefecture) }}"><br>
+                  住所
+                  <input type="text" name="detail" size="40" style="margin: 3px;" value="{{old('address', Auth::user()->address->detail) }}">
                 </td>
                 </tr>
 

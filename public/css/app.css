@@ -80,18 +80,13 @@ ul.order-bar li {
     /* margin-right: 3px; */
 }
 
-/* li.order-bar-item {
-  width: 16.6%;
-  line-height: 32px;
-  float: left;
-  font-size: 10px;
-  text-align: center;
-  list-style: none;
-
-} */
 
 ul.order-bar li.order-bar-item-select {
   background: #cfd6e4;
+}
+
+.pagination {
+  text-align: center;
 }
 
 /* .mytable {

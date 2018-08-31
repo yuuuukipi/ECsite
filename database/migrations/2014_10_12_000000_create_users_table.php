@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('gender');
             $table->date('birthday');
             $table->string('phone');
-            $table->string('address');
+            $table->string('address_id');
+            $table->unsignedInteger('card_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
