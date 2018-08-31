@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Address;
+
 
 class UsersController extends Controller
 {
@@ -38,8 +41,17 @@ class UsersController extends Controller
       Auth::user()->gender=$request->gender;
       Auth::user()->birthday=$birthday;
       Auth::user()->phone=$request->phone;
-      Auth::user()->address=$request->address;
+      // Auth::user()->address=$request->address;
       Auth::user()->save();
+
+      $address = Address::select('*')
+            ->where('id','=',Auth::user()->address_id)->get();
+            // dd($address[0]->detail);
+      $address[0]->postal_code = $request->postal_code;
+      $address[0]->prefecture = $request->prefecture;
+      $address[0]->detail = $request->detail;
+      $address[0]->save();
+
       return redirect(url('mypage/info'));
     }
 

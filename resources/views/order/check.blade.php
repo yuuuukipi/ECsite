@@ -78,10 +78,11 @@
                 <tr>
                 <td scope="col">住所</td>
                 <td>
-                  <span>{{Auth::user()->address}}</span>
+                  <span>〒{{Auth::user()->address->postal_code}}</span>
+                  <span>{{Auth::user()->address->prefecture}}</span>
+                  <span>{{Auth::user()->address->detail}}</span>
                 </td>
                 </tr>
-
               </tbody>
             </table>
 
@@ -93,25 +94,33 @@
                 </tr>
                 <tr>
                   <td scope="col" class="col-xs-3">名前</td>
-                  <td><span>{{Auth::user()->name}}</span>
+                  <td><span>{{$history->send_name}}</span>
+                    <input type="hidden" name="send_name" value="{{$history->send_name}}">
                   </td>
                 </tr>
                 <tr>
                   <td scope="col">メールアドレス</td>
                   <td>
-                    <span>{{Auth::user()->email}}</span>
+                    <span>{{$history->send_email}}</span>
+                    <input type="hidden" name="send_email" value="{{$history->send_email}}">
                   </td>
                 </tr>
                 <tr>
                   <td scope="col">電話番号</td>
                   <td>
-                    <span>{{Auth::user()->phone}}</span>
+                    <span>{{$history->send_phone}}</span>
+                    <input type="hidden" name="send_phone" value="{{$history->send_phone}}">
                   </td>
                 </tr>
                 <tr>
                 <td scope="col">住所</td>
                 <td>
-                  <span>{{Auth::user()->address}}</span>
+                  <span>〒{{$address->postal_code}}</span>
+                  <input type="hidden" name="postal_code" value="{{$address->postal_code}}">
+                  <span>{{$address->prefecture}}</span>
+                  <input type="hidden" name="prefecture" value="{{$address->prefecture}}">
+                  <span>{{$address->detail}}</span>
+                  <input type="hidden" name="detail" value="{{$address->detail}}">
                 </td>
                 </tr>
 
@@ -158,7 +167,7 @@
                     </button>
                 </div>
             </div>
-
+            <input type="hidden" name="send_method" value="{{$pay}}">
           </form>
 
           </div>

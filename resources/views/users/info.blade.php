@@ -63,7 +63,9 @@
         <tr>
         <td scope="col">住所</td>
         <td>
-          <input type="text" name="address" value="{{old('address', Auth::user()->address) }}">
+          〒<input type="text" name="postal_code" size="8" value="{{old('address', Auth::user()->address->postal_code) }}">
+          <input type="text" name="prefecture" size="10" value="{{old('address', Auth::user()->address->prefecture) }}">
+          <input type="text" name="detail" size="40" value="{{old('address', Auth::user()->address->detail) }}">
         </td>
         </tr>
 

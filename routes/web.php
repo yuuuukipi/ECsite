@@ -15,6 +15,11 @@ Route::get('/','ShopsController@index');
 
 //Auth
 Auth::routes();
+
+//ログイン
+// Route::get('/login','Auth\LoginController@login')->name('login');
+Route::post('/signin','Auth\LoginController@signin')->name('signin');
+
 //会員登録確認画面
 Route::post('/check','Auth\RegisterController@registerCheck')->name('registerCheck');
 //会員登録完了画面

@@ -88,11 +88,12 @@
                     <!-- <textarea name="comment" placeholder="コメント" size="20" class="form-control" rows="1">aaa</textarea> -->
                     <input type="text" name="card_num" size="20" value="{{old('card_num') }}">
                     <div>有効期限</div>
-                    <input type="text" name="card_day" size="20" value="{{old('card_day') }}">
+                    <input type="text" name="ex_year" size="5" value="{{old('ex_year') }}">年
+                    <input type="text" name="ex_month" size="5" value="{{old('ex_month') }}">月
                     <div>カード名義</div>
-                    <input type="text" name="card_name" size="20" value="{{old('card_name') }}">
+                    <input type="text" name="name" size="20" value="{{old('name') }}">
                     <div>セキュリティコード</div>
-                    <input type="text" name="card_cord" size="20" value="{{old('card_cord') }}">
+                    <input type="text" name="security_code" size="20" value="{{old('security_code') }}">
                     <br>
                   </td>
                 </tr>
@@ -107,7 +108,12 @@
                     </button>
                 </div>
             </div>
-            <input type="hidden" name="users" value="{{$send_uesr}}">
+            <input type="hidden" name="send_name" value="{{$history->send_name}}">
+            <input type="hidden" name="send_email" value="{{$history->send_email}}">
+            <input type="hidden" name="send_phone" value="{{$history->send_phone}}">
+            <input type="hidden" name="postal_code" value="{{$address->postal_code}}">
+            <input type="hidden" name="prefecture" value="{{$address->prefecture}}">
+            <input type="hidden" name="detail" value="{{$address->detail}}">
 
           </form>
 

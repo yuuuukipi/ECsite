@@ -46,10 +46,20 @@
                 <input type="hidden" name="birthday" value="{{$user->birthday}}">
               </div>
 
-            <div class="col-form-label">住所：
-              <span>{{$user->address}}</span>
-              <input type="hidden" name="address" value="{{$user->address}}">
-            </div>
+              <div class="col-form-label">郵便番号：
+                <span>{{$address->postal_code}}</span>
+                <input type="hidden" name="postal_code" value="{{$address->postal_code}}">
+              </div>
+
+              <div class="col-form-label">都道府県：
+                <span>{{$address->prefecture}}</span>
+                <input type="hidden" name="prefecture" value="{{$address->prefecture}}">
+              </div>
+
+              <div class="col-form-label">住所：
+                <span>{{$address->detail}}</span>
+                <input type="hidden" name="detail" value="{{$address->detail}}">
+              </div>
 
             <div class="col-form-label">電話番号：
               <span>{{$user->phone}}</span>
